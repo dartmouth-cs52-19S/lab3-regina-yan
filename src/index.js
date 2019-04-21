@@ -8,6 +8,7 @@ import { id } from 'postcss-selector-parser';
 import Immutable from 'immutable';
 import Note from './components/note';
 import AddNote from './components/add_note';
+import * as firebasedb from './services/datastore';
 
 
 class App extends Component {
@@ -19,8 +20,14 @@ class App extends Component {
       newNoteContent: '',
     };
     this.id = 0;
+    this.update = this.update.bind(this);
   }
 
+  componentDidMount() {
+    firebasedb.fetchNotes((notes) => {
+      this.setState({ notes: Immutable.Map(notes) });
+    });
+  }
 
   update(type, id, value) {
     if (type === 'editTitle') {
@@ -29,6 +36,7 @@ class App extends Component {
           return Object.assign({}, n, { title: value });
         }),
       });
+      firebasedb.editTitle(id, value);
     }
     if (type === 'editContent') {
       this.setState({
@@ -36,6 +44,7 @@ class App extends Component {
           return Object.assign({}, n, { text: value });
         }),
       });
+      firebasedb.editContent(id, value);
     }
     if (type === 'editPosition') {
       this.setState({
@@ -43,12 +52,13 @@ class App extends Component {
           return Object.assign({}, n, { x: value.x, y: value.y });
         }),
       });
+      firebasedb.editPosition(id, value.x, value.y);
     }
     if (type === 'deleteNote') {
       this.setState(prevState => ({
         notes: prevState.notes.delete(id),
       }));
-      console.log(`notes:  ${this.state.notes}`);
+      firebasedb.deleteNote(id);
     }
     if (type === 'addNote') {
       const newNote = {

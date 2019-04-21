@@ -9,28 +9,49 @@ class Note extends Component {
     super(props);
 
     this.state = {
-      isEditing: false,
       newContent: '',
       newTitle: '',
     };
+    this.isEditing = 0;
     this.position = { x: [props.note.x], y: [props.note.y] };
     this.onContentInputChange = this.onContentInputChange.bind(this);
     this.onTitleInputChange = this.onTitleInputChange.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.toggleSave = this.toggleSave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
+
   onContentInputChange(event) {
-    this.setState({ newContent: event.target.value });
-    this.setState({ newContent: event.target.value });
-    this.props.update('editContent', this.props.id, event.target.value);
+    if (this.isEditing === 1) {
+      this.setState({ newContent: event.target.value });
+    }
   }
 
   onTitleInputChange(event) {
-    console.log(event.target.value);
-    this.setState({ newTitle: event.target.value });
-    this.props.update('editTitle', this.props.id, event.target.value);
+    if (this.isEditing === 1) {
+      this.setState({ newTitle: event.target.value });
+    }
   }
 
+  toggleEdit() {
+    if (this.isEditing === 0) {
+      this.isEditing = 1;
+    } else {
+      this.isEditing = 0;
+    }
+  }
+
+  toggleSave() {
+    if (this.isEditing === 1) {
+      this.props.update('editTitle', this.props.id, this.NewTitle);
+      this.props.update('editContent', this.props.id, this.NewContent);
+      this.isEditing = 0;
+    } else {
+      this.isEditing = 1;
+    }
+  }
 
   handleDelete() {
     this.props.update('deleteNote', this.props.id, '');
@@ -42,20 +63,20 @@ class Note extends Component {
 
   renderContent() {
     return (
-      <div>
+      <div className="note">
         <div className="header">
           <div>
-            <input name="title" placeholder="new Title" onChange={this.onTitleInputChange} value={this.state.newTitle} />
+            <input name="title" placeholder="Click to edit Title" onChange={this.onTitleInputChange} value={this.state.newTitle} />
           </div>
           <div className="action-icons">
+            <i onClick={this.toggleEdit} className="far fa-edit" />
+            <i onClick={this.toggleSave} className="fas fa-check" />
             <i onClick={this.handleDelete} className="far fa-trash-alt" />
-            <i onClick={this.handleEdit} className="far fa-edit" />
             <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />
           </div>
         </div>
         <div>
-          <textarea onChange={this.onContentInputChange} value={this.state.newContent} />
-          {/* <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} /> */}
+          <textarea placeholder="Click to edit Text" onChange={this.onContentInputChange} value={this.state.newContent} />
         </div>
       </div>
     );
@@ -70,7 +91,7 @@ class Note extends Component {
         position={{ x: this.props.note.x, y: this.props.note.y }}
         onDrag={this.handleDrag}
       >
-        <div className="note">
+        <div>
           {this.renderContent()}
         </div>
 

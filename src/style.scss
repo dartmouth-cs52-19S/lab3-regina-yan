@@ -1,8 +1,14 @@
 body, html {
     font-family: "Roboto", sans-serif;
     height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+    color: #161616;
   }
-
+h3{
+  font-weight: 200;
+}
   .logo {
     background-image: url('img/rocket.png');
     width: 100px;
@@ -17,6 +23,15 @@ body, html {
     height: 400px;
     padding: 1em;
     border: 2px solid #A0C6E5;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  .editingnote{
+    position: absolute;
+    background: white;
+    width: 450px;
+    height: 400px;
+    padding: 1em;
+    border: 2px solid #4AD494;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   }
 
@@ -65,4 +80,15 @@ body, html {
     transform: scale(1.05);
     background: #A0C6E5;
     color: white;
+  }
+  .page-header{
+    border-bottom: 2px solid #A0C6E5;
+    margin: 0 auto;
+    padding: 2em;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    background: white;
+  }
+
+  .fa-check{
+    color: #4AD494
   }

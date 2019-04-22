@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 
-const config = {
+const firebaseConfig = {
   apiKey: 'AIzaSyCUzXMy0gIiqwblcDyDjCc6TS-bRhg3Ajk',
   authDomain: 'cs52-lab3-c1f35.firebaseapp.com',
   databaseURL: 'https://cs52-lab3-c1f35.firebaseio.com',
@@ -9,12 +9,11 @@ const config = {
   storageBucket: 'cs52-lab3-c1f35.appspot.com',
   messagingSenderId: '900658289334',
 };
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 export function fetchNotes(callback) {
   firebase.database().ref('notes').on('value', (snapshot) => {
-    const newNotesState = snapshot.val();
-    callback(newNotesState);
+    callback(snapshot.val());
   });
 }
 
@@ -32,10 +31,10 @@ export function deleteNote(id) {
 export function addNote() {
   firebase.database().ref('notes').push({
     title: '',
-    content: '',
+    text: '',
     x: 10,
     y: 10,
-    editor: '',
+    zIndex: 0,
   });
 }
 

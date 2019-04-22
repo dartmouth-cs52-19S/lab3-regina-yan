@@ -25,32 +25,30 @@ class Note extends Component {
 
   onContentInputChange(event) {
     if (this.isEditing === 1) {
+      this.newContent = event.target.value;
       this.setState({ newContent: event.target.value });
+      console.log(`New Content is  ${this.newContent}`);
     }
   }
 
   onTitleInputChange(event) {
     if (this.isEditing === 1) {
+      this.newTitle = event.target.value;
       this.setState({ newTitle: event.target.value });
+      console.log(`New Title is  ${this.newTitle}`);
     }
+    this.props.update('editTitle', this.props.id, this.state.newTitle);
   }
 
   toggleEdit() {
-    if (this.isEditing === 0) {
-      this.isEditing = 1;
-    } else {
-      this.isEditing = 0;
-    }
+    this.isEditing = 1;
   }
 
   toggleSave() {
-    if (this.isEditing === 1) {
-      this.props.update('editTitle', this.props.id, this.NewTitle);
-      this.props.update('editContent', this.props.id, this.NewContent);
-      this.isEditing = 0;
-    } else {
-      this.isEditing = 1;
-    }
+    console.log(this.newTitle);
+    this.props.update('editTitle', this.props.id, this.state.newTitle);
+    this.props.update('editContent', this.props.id, this.state.newContent);
+    this.isEditing = 0;
   }
 
   handleDelete() {
@@ -62,24 +60,44 @@ class Note extends Component {
   }
 
   renderContent() {
-    return (
-      <div className="note">
-        <div className="header">
+    if (this.isEditing === 1) {
+      return (
+        <div className="editingnote">
+          <div className="header">
+            <div>
+              <input name="title" placeholder="Title" onChange={this.onTitleInputChange} value={this.state.newTitle} />
+            </div>
+            <div className="action-icons">
+              <i onClick={this.toggleSave} className="fas fa-check" />
+              <i onClick={this.handleDelete} className="far fa-trash-alt" />
+              <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />
+            </div>
+          </div>
           <div>
-            <input name="title" placeholder="Click to edit Title" onChange={this.onTitleInputChange} value={this.state.newTitle} />
-          </div>
-          <div className="action-icons">
-            <i onClick={this.toggleEdit} className="far fa-edit" />
-            <i onClick={this.toggleSave} className="fas fa-check" />
-            <i onClick={this.handleDelete} className="far fa-trash-alt" />
-            <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />
+            <textarea className="editing" placeholder="Text" onChange={this.onContentInputChange} value={this.state.newContent} />
           </div>
         </div>
-        <div>
-          <textarea placeholder="Click to edit Text" onChange={this.onContentInputChange} value={this.state.newContent} />
+      );
+    } else {
+      return (
+        <div className="note">
+          <div className="header">
+            <div>
+              <input name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.state.newTitle} />
+            </div>
+            <div className="action-icons">
+              <i onClick={this.toggleEdit} className="far fa-edit" />
+              {/* <i onClick={this.toggleSave} className="fas fa-check" /> */}
+              <i onClick={this.handleDelete} className="far fa-trash-alt" />
+              <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />
+            </div>
+          </div>
+          <div>
+            <textarea className="notEditing" placeholder="Click Edit Button to edit Title and Text" onChange={this.onContentInputChange} value={this.state.newContent} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 
   render() {

@@ -9,16 +9,29 @@ import React, { Component } from 'react';
 class AddNote extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      newTitle: '',
+    };
     this.handleNewNote = this.handleNewNote.bind(this);
+    this.onTitleInputChange = this.onTitleInputChange.bind(this);
+  }
+
+  onTitleInputChange(event) {
+    this.newTitle = event.target.value;
+    this.setState({ newTitle: event.target.value });
   }
 
   handleNewNote() {
-    this.props.update('addNote', '', '');
+    this.props.update('addNote', '', this.state.newTitle);
   }
+
 
   render() {
     return (
-      <button type="button" onClick={this.handleNewNote}>New Note</button>
+      <div>
+        <input className="newNoteInput" name="title" placeholder="New Note Title" onChange={this.onTitleInputChange} value={this.state.newTitle} />
+        <button type="button" onClick={this.handleNewNote}>New Note</button>
+      </div>
     );
   }
 }

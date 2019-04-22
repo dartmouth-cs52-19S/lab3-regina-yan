@@ -43,7 +43,7 @@ class App extends Component {
       db.deleteNote(id);
     }
     if (type === 'addNote') {
-      db.addNote();
+      db.addNote(value);
       this.id += 1;
     }
   }

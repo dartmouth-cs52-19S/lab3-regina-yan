@@ -28,9 +28,9 @@ export function deleteNote(id) {
   firebase.database().ref('notes').child(id).remove();
 }
 
-export function addNote() {
+export function addNote(value) {
   firebase.database().ref('notes').push({
-    title: '',
+    title: value,
     text: '',
     x: 10,
     y: 10,

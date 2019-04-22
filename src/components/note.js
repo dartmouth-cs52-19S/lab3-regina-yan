@@ -83,7 +83,7 @@ class Note extends Component {
         <div className="note">
           <div className="header">
             <div>
-              <input name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.state.newTitle} />
+              <input name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.props.note.title} />
             </div>
             <div className="action-icons">
               <i onClick={this.toggleEdit} className="far fa-edit" />
@@ -93,7 +93,7 @@ class Note extends Component {
             </div>
           </div>
           <div>
-            <textarea className="notEditing" placeholder="Click Edit Button to edit Title and Text" onChange={this.onContentInputChange} value={this.state.newContent} />
+            <textarea className="notEditing" placeholder="Click Edit Button to edit Title and Text" onChange={this.onContentInputChange} value={this.props.note.text} />
           </div>
         </div>
       );

@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import marked from 'marked';
 
 class Note extends Component {
   constructor(props) {
@@ -11,8 +10,8 @@ class Note extends Component {
     this.state = {
       newContent: '',
       newTitle: '',
+      isEditing: 0,
     };
-    this.isEditing = 0;
     this.position = { x: [props.note.x], y: [props.note.y] };
     this.onContentInputChange = this.onContentInputChange.bind(this);
     this.onTitleInputChange = this.onTitleInputChange.bind(this);
@@ -24,16 +23,14 @@ class Note extends Component {
 
 
   onContentInputChange(event) {
-    if (this.isEditing === 1) {
-      this.newContent = event.target.value;
+    if (this.state.isEditing === 1) {
       this.setState({ newContent: event.target.value });
       console.log(`New Content is  ${this.newContent}`);
     }
   }
 
   onTitleInputChange(event) {
-    if (this.isEditing === 1) {
-      this.newTitle = event.target.value;
+    if (this.state.isEditing === 1) {
       this.setState({ newTitle: event.target.value });
       console.log(`New Title is  ${this.newTitle}`);
     }
@@ -41,14 +38,14 @@ class Note extends Component {
   }
 
   toggleEdit() {
-    this.isEditing = 1;
+    this.setState({ isEditing: 1 });
   }
 
   toggleSave() {
     console.log(this.newTitle);
     this.props.update('editTitle', this.props.id, this.state.newTitle);
     this.props.update('editContent', this.props.id, this.state.newContent);
-    this.isEditing = 0;
+    this.setState({ isEditing: 0 });
   }
 
   handleDelete() {
@@ -60,12 +57,12 @@ class Note extends Component {
   }
 
   renderContent() {
-    if (this.isEditing === 1) {
+    if (this.state.isEditing === 1) {
       return (
         <div className="editingnote">
           <div className="header">
             <div>
-              <input name="title" placeholder="Title" onChange={this.onTitleInputChange} value={this.state.newTitle} />
+              <input name="title" placeholder={this.props.note.title} onChange={this.onTitleInputChange} value={this.state.newTitle} />
             </div>
             <div className="action-icons">
               <i onClick={this.toggleSave} className="fas fa-check" />
@@ -74,7 +71,7 @@ class Note extends Component {
             </div>
           </div>
           <div>
-            <textarea className="editing" placeholder="Text" onChange={this.onContentInputChange} value={this.state.newContent} />
+            <textarea className="editing" placeholder={this.props.note.text} onChange={this.onContentInputChange} value={this.state.newContent} />
           </div>
         </div>
       );
@@ -83,7 +80,7 @@ class Note extends Component {
         <div className="note">
           <div className="header">
             <div>
-              <input name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.props.note.title} />
+              <input className="notEditing" name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.props.note.title} />
             </div>
             <div className="action-icons">
               <i onClick={this.toggleEdit} className="far fa-edit" />

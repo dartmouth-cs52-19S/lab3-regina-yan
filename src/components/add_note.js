@@ -17,12 +17,12 @@ class AddNote extends Component {
   }
 
   onTitleInputChange(event) {
-    this.newTitle = event.target.value;
     this.setState({ newTitle: event.target.value });
   }
 
   handleNewNote() {
     this.props.update('addNote', '', this.state.newTitle);
+    this.setState({ newTitle: '' });
   }
 
 

@@ -20,7 +20,7 @@ h3{
     position: absolute;
     background: white;
     width: 450px;
-    height: 400px;
+    min-height: 120px;
     padding: 1em;
     border: 2px solid #A0C6E5;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
@@ -29,16 +29,18 @@ h3{
     position: absolute;
     background: white;
     width: 450px;
-    height: 400px;
+    min-height: 120px;
     padding: 1em;
     border: 2px solid #4AD494;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   }
 
   textarea{
-    height: 200px;
+    height: 100px;
     width: 425px;
     border: none;
+    font-size: 11pt;
+    font-weight: 200;
   }
   textarea:focus{
     background: #f5f5f5;

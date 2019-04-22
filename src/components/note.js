@@ -43,8 +43,12 @@ class Note extends Component {
 
   toggleSave() {
     console.log(this.newTitle);
-    this.props.update('editTitle', this.props.id, this.state.newTitle);
-    this.props.update('editContent', this.props.id, this.state.newContent);
+    if (this.state.newTitle !== '') {
+      this.props.update('editTitle', this.props.id, this.state.newTitle);
+    }
+    if (this.state.newContent !== '') {
+      this.props.update('editContent', this.props.id, this.state.newContent);
+    }
     this.setState({ isEditing: 0 });
   }
 
@@ -84,7 +88,6 @@ class Note extends Component {
             </div>
             <div className="action-icons">
               <i onClick={this.toggleEdit} className="far fa-edit" />
-              {/* <i onClick={this.toggleSave} className="fas fa-check" /> */}
               <i onClick={this.handleDelete} className="far fa-trash-alt" />
               <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />
             </div>

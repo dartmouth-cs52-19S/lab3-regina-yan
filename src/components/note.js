@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import TextareaAutosize from 'react-textarea-autosize';
+import marked from 'marked';
 
 class Note extends Component {
   constructor(props) {
@@ -84,6 +85,7 @@ class Note extends Component {
               onChange={this.onContentInputChange}
               value={this.state.newContent}
             />
+            {/* <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} /> */}
           </div>
         </div>
       );
@@ -101,14 +103,7 @@ class Note extends Component {
             </div>
           </div>
           <div>
-            <TextareaAutosize
-              style={{ boxSizing: 'border-box' }}
-              minRows={3}
-              className="notEditing"
-              placeholder="Click Edit Button to edit Title and Text"
-              onChange={this.onContentInputChange}
-              value={this.props.note.text}
-            />
+            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
           </div>
         </div>
       );

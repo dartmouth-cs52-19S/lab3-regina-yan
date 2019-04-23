@@ -55,8 +55,18 @@ class App extends Component {
     return (
       <div>
         <div className="page-header">
-          <h1>Regina's Notes</h1>
-          <h3>Click the "New Note" button to get started.</h3>
+          <div className="header-content">
+            <div>
+              <h1>Regina's Notes</h1>
+              <h3>Click the "New Note" button to get started.</h3>
+            </div>
+            <div className="instructions">
+              <h3>Instructions</h3>
+              <h4>
+              Make sure you click the "edit" icon if you want to make any changes. An undo button will appear after an edit if you want to go back to the previous text. You can change the color of your notes with the color boxes.  Feel free to move notes around or delete them if you wish!
+              </h4>
+            </div>
+          </div>
         </div>
         <AddNote update={(type, key, value) => this.update(type, key, value)} />
         {this.state.notes.entrySeq().map(([id, note]) => {

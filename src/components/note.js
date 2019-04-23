@@ -177,7 +177,6 @@ class Note extends Component {
     return (
       <Draggable
         handle=".drag"
-        // grid={[25, 25]}
         defaultPosition={{ x: 20, y: 20 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
         onDrag={this.handleDrag}

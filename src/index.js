@@ -46,6 +46,9 @@ class App extends Component {
       db.addNote(value);
       this.id += 1;
     }
+    if (type === 'editColor') {
+      db.editColor(id, value);
+    }
   }
 
   render() {

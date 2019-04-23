@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/no-danger */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
@@ -25,6 +26,10 @@ class Note extends Component {
     this.toggleSave = this.toggleSave.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleUndo = this.toggleUndo.bind(this);
+    this.toggleColorBlue = this.toggleColorBlue.bind(this);
+    this.toggleColorYellow = this.toggleColorYellow.bind(this);
+    this.toggleColorOrange = this.toggleColorOrange.bind(this);
+    this.toggleColorPurple = this.toggleColorPurple.bind(this);
   }
 
 
@@ -69,6 +74,22 @@ class Note extends Component {
     this.setState({ hasEdited: 1 });
   }
 
+  toggleColorBlue() {
+    this.props.update('editColor', this.props.id, 'blue');
+  }
+
+  toggleColorOrange() {
+    this.props.update('editColor', this.props.id, 'orange');
+  }
+
+  toggleColorYellow() {
+    this.props.update('editColor', this.props.id, 'yellow');
+  }
+
+  toggleColorPurple() {
+    this.props.update('editColor', this.props.id, 'purple');
+  }
+
   handleDelete() {
     this.props.update('deleteNote', this.props.id, '');
   }
@@ -106,12 +127,16 @@ class Note extends Component {
     }
     if (this.state.hasEdited === 1) {
       return (
-        <div className="note">
+        <div className={this.props.note.color}>
           <div className="header">
             <div>
               <input className="notEditing" name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.props.note.title} />
             </div>
             <div className="action-icons">
+              <i onClick={this.toggleColorBlue} className="drag fas fa-square" id="blue" />
+              <i onClick={this.toggleColorPurple} className="drag fas fa-square" id="purple" />
+              <i onClick={this.toggleColorYellow} className="drag fas fa-square" id="yellow" />
+              <i onClick={this.toggleColorOrange} className="drag fas fa-square" id="orange" />
               <i onClick={this.toggleUndo} className="fas fa-undo" />
               <i onClick={this.toggleEdit} className="far fa-edit" />
               <i onClick={this.handleDelete} className="far fa-trash-alt" />
@@ -125,12 +150,16 @@ class Note extends Component {
       );
     } else {
       return (
-        <div className="note">
+        <div className={this.props.note.color}>
           <div className="header">
             <div>
               <input className="notEditing" name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.props.note.title} />
             </div>
             <div className="action-icons">
+              <i onClick={this.toggleColorBlue} className="drag fas fa-square" id="blue" />
+              <i onClick={this.toggleColorPurple} className="drag fas fa-square" id="purple" />
+              <i onClick={this.toggleColorYellow} className="drag fas fa-square" id="yellow" />
+              <i onClick={this.toggleColorOrange} className="drag fas fa-square" id="orange" />
               <i onClick={this.toggleEdit} className="far fa-edit" />
               <i onClick={this.handleDelete} className="far fa-trash-alt" />
               <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />

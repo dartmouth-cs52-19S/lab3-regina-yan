@@ -35,7 +35,12 @@ export function addNote(value) {
     x: 10,
     y: 10,
     zIndex: 0,
+    color: 'blue',
   });
+}
+
+export function editColor(id, value) {
+  firebase.database().ref('notes').child(id).update({ color: value });
 }
 
 export function editPosition(id, x, y) {

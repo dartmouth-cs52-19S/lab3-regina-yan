@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable no-shadow */

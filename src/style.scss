@@ -19,7 +19,7 @@ h3{
   .note {
     position: absolute;
     background: white;
-    width: 450px;
+    min-width: 450px;
     min-height: 120px;
     padding: 1em;
     border: 2px solid #A0C6E5;
@@ -28,7 +28,7 @@ h3{
   .editingnote{
     position: absolute;
     background: white;
-    width: 450px;
+    min-width: 450px;
     min-height: 120px;
     padding: 1em;
     border: 2px solid #4AD494;

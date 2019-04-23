@@ -27,24 +27,24 @@ class Note extends Component {
   onContentInputChange(event) {
     if (this.state.isEditing === 1) {
       this.setState({ newContent: event.target.value });
-      console.log(`New Content is  ${this.newContent}`);
     }
   }
 
   onTitleInputChange(event) {
     if (this.state.isEditing === 1) {
       this.setState({ newTitle: event.target.value });
-      console.log(`New Title is  ${this.newTitle}`);
     }
     this.props.update('editTitle', this.props.id, this.state.newTitle);
   }
 
   toggleEdit() {
     this.setState({ isEditing: 1 });
+    console.log(this.props.note.title);
+    this.setState({ newTitle: this.props.note.title });
+    this.setState({ newContent: this.props.note.text });
   }
 
   toggleSave() {
-    console.log(this.newTitle);
     if (this.state.newTitle !== '') {
       this.props.update('editTitle', this.props.id, this.state.newTitle);
     }

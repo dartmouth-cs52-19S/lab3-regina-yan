@@ -27,3 +27,7 @@ With 30 minutes before the lab due, I thought I'd put my React skills to the tes
 
 
 
+### Acknowledgements
+Special thanks to Sheppard Somers '19 for helping me understand React. Could not have done it without him :)
+
+

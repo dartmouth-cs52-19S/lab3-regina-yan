@@ -17,3 +17,7 @@ I also added a feature that changes the color of the note when the user is editi
 
 I wanted to eventually implement a cool feature that lets the user change the border color of the note, but unfortunately I ran out of time. 
 
+# Extra Credit
+While I didn't end up implementing something that lets the user change the border color, I did add an undo button! I decided to only have the button show up if you have edited something, as seen below. 
+
+<img width="500" alt="Screen Shot 2019-04-22 at 10 26 39 PM" src="https://user-images.githubusercontent.com/38498065/56548333-d6137f80-654d-11e9-9c5f-f685786e6ac8.png">

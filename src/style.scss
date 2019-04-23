@@ -7,7 +7,11 @@ body, html {
     color: #161616;
   }
 h3{
-  font-weight: 200;
+  font-weight: 300;
+  font-size: 10pt;
+}
+h1{
+  font-size: 20pt;
 }
   .logo {
     background-image: url('img/rocket.png');
@@ -28,7 +32,7 @@ h3{
   .editingnote{
     position: absolute;
     background: white;
-    min-width: 450px;
+    min-width: 250px;
     min-height: 120px;
     padding: 1em;
     border: 2px solid #4AD494;
@@ -65,7 +69,7 @@ h3{
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   }
   input{
-    font-size: 20pt;
+    font-size: 18pt;
     border: none;
   }
   input:focus{
@@ -99,11 +103,19 @@ h3{
   .page-header{
     border-bottom: 2px solid #A0C6E5;
     margin: 0 auto;
-    padding: 2em;
+    padding: 1em;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
     background: white;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    width: 100%;
   }
 
   .fa-check{
     color: #4AD494
+  }
+
+  .fa-undo:hover{
+    color: #F75843;
   }

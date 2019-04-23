@@ -13,7 +13,10 @@ class Note extends Component {
       newContent: '',
       newTitle: '',
       isEditing: 0,
+      hasEdited: 0,
     };
+    this.undoContent = '';
+    this.undoTitle = '';
     this.position = { x: [props.note.x], y: [props.note.y] };
     this.onContentInputChange = this.onContentInputChange.bind(this);
     this.onTitleInputChange = this.onTitleInputChange.bind(this);
@@ -21,6 +24,7 @@ class Note extends Component {
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleSave = this.toggleSave.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.toggleUndo = this.toggleUndo.bind(this);
   }
 
 
@@ -37,9 +41,19 @@ class Note extends Component {
     this.props.update('editTitle', this.props.id, this.state.newTitle);
   }
 
+  toggleUndo() {
+    if (this.state.newTitle !== '') {
+      this.props.update('editTitle', this.props.id, this.state.undoTitle);
+    }
+    if (this.state.newContent !== '') {
+      this.props.update('editContent', this.props.id, this.state.undoContent);
+    }
+  }
+
   toggleEdit() {
     this.setState({ isEditing: 1 });
-    console.log(this.props.note.title);
+    this.setState({ undoContent: this.props.note.text });
+    this.setState({ undoTitle: this.props.note.title });
     this.setState({ newTitle: this.props.note.title });
     this.setState({ newContent: this.props.note.text });
   }
@@ -52,6 +66,7 @@ class Note extends Component {
       this.props.update('editContent', this.props.id, this.state.newContent);
     }
     this.setState({ isEditing: 0 });
+    this.setState({ hasEdited: 1 });
   }
 
   handleDelete() {
@@ -85,7 +100,26 @@ class Note extends Component {
               onChange={this.onContentInputChange}
               value={this.state.newContent}
             />
-            {/* <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} /> */}
+          </div>
+        </div>
+      );
+    }
+    if (this.state.hasEdited === 1) {
+      return (
+        <div className="note">
+          <div className="header">
+            <div>
+              <input className="notEditing" name="title" placeholder="New Note" onChange={this.onTitleInputChange} value={this.props.note.title} />
+            </div>
+            <div className="action-icons">
+              <i onClick={this.toggleUndo} className="fas fa-undo" />
+              <i onClick={this.toggleEdit} className="far fa-edit" />
+              <i onClick={this.handleDelete} className="far fa-trash-alt" />
+              <i onClick={this.handleDrag} className="drag fas fa-arrows-alt" />
+            </div>
+          </div>
+          <div>
+            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
           </div>
         </div>
       );
